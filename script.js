@@ -41,9 +41,12 @@ function updateDOMwithData(json, timeframe) {
 let currentTimeframe = "weekly";
 
 const timeframeBtns = [...document.querySelectorAll(".profile-times")];
-timeframeBtns.forEach((timeframeBtn, index) => {
+timeframeBtns.forEach((timeframeBtn) => {
   timeframeBtn.addEventListener("click", () => {
     currentTimeframe = timeframeBtn.innerHTML.toLowerCase();
+
+    timeframeBtns.forEach((btn) => btn.classList.add("subtle"));
+    timeframeBtn.classList.remove("subtle");
 
     fetch("./data.json") // returns a promise
       .then((response) => response.json()) // returns a promise
