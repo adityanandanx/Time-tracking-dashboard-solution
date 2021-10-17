@@ -51,11 +51,21 @@ I learnt quite a few things actually, the most important one being how to fetch 
 This function below is what i'm the most proud of:-
 
 ```js
-function updateData(json, timeframe) {
+function updateDOMwithData(json, timeframe) {
   const container = document.querySelector("#grid-container");
 
+  // getting the profile element
+  const profile = document.querySelector(".profile");
+  // then clearing all stuff
+  container.innerHTML = "";
+  // inserting the profile element
+  container.insertAdjacentElement("afterbegin", profile);
+
+  // inserting all the cards according to the data given
   json.forEach((element) => {
-    container.innerHTML += `
+    container.insertAdjacentHTML(
+      "beforeend",
+      `
     <div class="card ${element.title.replace(" ", "-").toLowerCase()}">
       <div class="card-content">
         <div class="card-top-bar">
@@ -74,7 +84,8 @@ function updateData(json, timeframe) {
         } - ${element.timeframes[timeframe].previous}hrs</p>
       </div>
     </div>
-    `;
+    `
+    );
   });
 }
 ```
